@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa'; // Corrected imports
+import { FaHome, FaUser, FaCog, FaSignOutAlt } from 'react-icons/fa';
 import supabase from '../lib/Db';
-
-
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -19,37 +17,32 @@ const getStatusColor = (status) => {
 };
 
 const LoanReqPage = () => {
-  const [loanData, setLoanData] = useState([]); 
+  const [loanData, setLoanData] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchLoanData = async () => {
-
-      const { data: { user } } = await supabase.auth.getUser()
-
+      const { data: { user } } = await supabase.auth.getUser();
       const { data, error } = await supabase
         .from('LoanData')
         .select('*')
-        .eq('UID', user.id)
+        .eq('UID', user.id);
 
       if (error) {
         console.error("Error fetching loan data:", error);
       } else {
-        setLoanData(data); // Set fetched loan data into state
+        setLoanData(data);
       }
     };
 
     fetchLoanData();
   }, []);
 
-
-
   return (
-    <div className="flex min-h-screen bg-gray-100 pt-20">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-100 pt-20">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-lg p-6 space-y-6">
+      <aside className="w-full md:w-64 bg-white shadow-lg p-6 space-y-6">
         <div className="text-2xl font-bold text-emerald-600">Dashboard 🧑‍💻</div>
         <nav className="space-y-4">
-            
           <Link to="/user-dashboard" className="flex items-center space-x-2 hover:text-emerald-600">
             <FaHome size={20} /> <span>Dashboard</span>
           </Link>
@@ -69,10 +62,10 @@ const LoanReqPage = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 pt-20">
-        {/* Heading + New Loan Button */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-semibold">My Loan Requests</h1>
+      <div className="flex-1 p-4 md:p-8">
+        {/* Heading + Button */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+          <h1 className="text-2xl md:text-3xl font-semibold">My Loan Requests</h1>
           <Link
             to="/new-loan"
             className="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition"
@@ -81,7 +74,7 @@ const LoanReqPage = () => {
           </Link>
         </div>
 
-        {/* Loan Request Table */}
+        {/* Loan Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white rounded-xl shadow-md">
             <thead>

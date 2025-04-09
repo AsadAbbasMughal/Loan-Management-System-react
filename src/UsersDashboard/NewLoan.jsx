@@ -17,18 +17,18 @@ const NewLoan = () => {
 
   const handleLoanData = async (e) => {
     e.preventDefault();
-  
+
     // Step 1: Get the current user
     const { data: { user }, error: userError } = await supabase.auth.getUser();
-  
+
     if (userError || !user) {
       toast.error("User not authenticated ❌");
       console.error("Auth error:", userError?.message);
       return;
     }
-  
+
     console.log("Current User ID:", user.id); // Just to check
-  
+
     // Step 2: Insert loan data
     const { error, data } = await supabase
       .from('LoanData')
@@ -44,17 +44,17 @@ const NewLoan = () => {
         status,
       })
       .select();
-  
+
     if (error) {
       toast.error("Loan submission failed 😞");
       console.error("Submission error:", error.message);
       return;
     }
-  
+
     if (data) {
       toast.success("Loan Application Submitted Successfully! ✅");
       console.log("Loan submitted", data);
-  
+
       // Clear form
       setName('');
       setEmail('');
@@ -66,12 +66,11 @@ const NewLoan = () => {
       setDate(new Date().toISOString());
     }
   };
-  
 
   return (
-    <div className="min-h-screen flex bg-gray-50 text-gray-800 pt-20">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 text-gray-800 pt-20">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md p-6 space-y-6">
+      <aside className="w-full md:w-64 bg-white shadow-md p-6 space-y-6 md:space-y-8">
         <div className="text-2xl font-bold text-emerald-600">Dashboard 🧑‍💻</div>
         <nav className="space-y-4">
           <Link to="/user-dashboard" className="flex items-center space-x-2 hover:text-emerald-600">
@@ -93,7 +92,7 @@ const NewLoan = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-10">
+      <main className="flex-1 p-6 md:p-10">
         <div className="p-6 bg-white shadow-lg rounded-lg w-full max-w-2xl mx-auto">
           <h1 className="text-3xl font-semibold text-gray-800">Apply for New Loan</h1>
           <div className="mt-6">

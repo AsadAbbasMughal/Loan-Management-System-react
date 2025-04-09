@@ -85,26 +85,36 @@ const AdminDashboard = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div className="bg-white p-5 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-600">Total Applications</h3>
-            <p className="text-2xl mt-2 font-bold text-emerald-600">{allLoanData.length}</p>
-          </div>
-          <div className="bg-white p-5 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-600">Pending Requests</h3>
-            <p className="text-2xl mt-2 font-bold text-yellow-500">{pendingCount}</p>
-          </div>
-          <div className="bg-white p-5 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-600">Approved Loans</h3>
-            <p className="text-2xl mt-2 font-bold text-green-600">{approvedCount}</p>
-          </div>
-          <div className="bg-white p-5 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-600">Rejected Loans</h3>
-            <p className="text-2xl mt-2 font-bold text-red-600">{rejectedCount}</p>
-          </div>
-          <div className="bg-white p-5 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-600">Total Disbursed</h3>
-            <p className="text-2xl mt-2 font-bold text-emerald-600">{disbursedAmount}</p>
-          </div>
+          <Link to={'/admin-dashboard'}>
+            <div className="bg-white p-5 rounded-lg shadow-md cursor-pointer">
+              <h3 className="text-lg font-semibold text-gray-600">Total Applications</h3>
+              <p className="text-2xl mt-2 font-bold text-emerald-600">{allLoanData.length}</p>
+            </div>
+          </Link>
+          <Link to={'/pending'}>
+            <div className="bg-white p-5 rounded-lg shadow-md cursor-pointer">
+              <h3 className="text-lg font-semibold text-gray-600">Pending Requests</h3>
+              <p className="text-2xl mt-2 font-bold text-yellow-500">{pendingCount}</p>
+            </div>
+          </Link>
+          <Link to={'/approved-loan'}>
+            <div className="bg-white p-5 rounded-lg shadow-md cursor-pointer">
+              <h3 className="text-lg font-semibold text-gray-600">Approved Loans</h3>
+              <p className="text-2xl mt-2 font-bold text-green-600">{approvedCount}</p>
+            </div>
+          </Link>
+          <Link to={'/rejected-loan'}>
+            <div className="bg-white p-5 rounded-lg shadow-md cursor-pointer">
+              <h3 className="text-lg font-semibold text-gray-600">Rejected Loans</h3>
+              <p className="text-2xl mt-2 font-bold text-red-600">{rejectedCount}</p>
+            </div>
+          </Link>
+          <Link to={'/disbursed'}>
+            <div className="bg-white p-5 rounded-lg shadow-md cursor-pointer">
+              <h3 className="text-lg font-semibold text-gray-600">Total Disbursed</h3>
+              <p className="text-2xl mt-2 font-bold text-emerald-600">{disbursedAmount}</p>
+            </div>
+          </Link>
         </div>
 
         {/* Loan Data Table */}
